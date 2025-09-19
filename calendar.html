@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Calendar – Society of Construction Law, India</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <!-- AOS (Animations) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary: #1a365d;
+            --secondary: #c25705;
+            --accent: #e9b949;
+            --light: #f8f9fa;
+            --dark: #2d3748;
+            --text: #4a5568;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            color: var(--text);
+            scroll-behavior: smooth;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #fff;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar-brand {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .navbar-nav .nav-link {
+            font-weight: 500;
+            padding: 10px 18px;
+            transition: all 0.3s ease;
+            color: var(--dark);
+            position: relative;
+        }
+
+        .navbar-nav .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: var(--secondary);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .navbar-nav .nav-link:hover:after {
+            width: 70%;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #12243f;
+            border-color: #12243f;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .page-banner {
+            background: linear-gradient(rgba(26, 54, 93, 0.85), rgba(26, 54, 93, 0.9)), url('https://images.unsplash.com/photo-1505373877841-8d25f7d46678?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80') center/cover no-repeat;
+            color: #fff;
+            padding: 120px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-banner:before {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: var(--secondary);
+        }
+
+        .page-banner h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .page-banner p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .calendar-filters {
+            background: var(--light);
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .event-card {
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            height: 100%;
+            margin-bottom: 25px;
+        }
+
+        .event-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .event-date {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            margin: 20px;
+            float: left;
+            position: relative;
+            z-index: 1;
+        }
+
+        .event-day {
+            font-size: 1.8rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .event-month {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            margin-top: 5px;
+        }
+
+        .event-content {
+            padding: 25px;
+            overflow: hidden;
+        }
+
+        .event-title {
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .event-meta {
+            display: flex;
+            align-items: center;
+            color: #718096;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .event-meta span {
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .event-meta i {
+            margin-right: 5px;
+            color: var(--primary);
+        }
+
+        .event-type {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .event-type.conference {
+            background: rgba(194, 87, 5, 0.15);
+            color: var(--secondary);
+        }
+
+        .event-type.workshop {
+            background: rgba(233, 185, 73, 0.15);
+            color: #b68a13;
+        }
+
+        .event-type.webinar {
+            background: rgba(26, 54, 93, 0.15);
+            color: var(--primary);
+        }
+
+        .event-type.networking {
+            background: rgba(101, 186, 186, 0.15);
+            color: #2a7e7e;
+        }
+
+        .event-btn {
+            background: var(--primary);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+        }
+
+        .event-btn:hover {
+            background: var(--secondary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .calendar-container {
+            margin-bottom: 40px;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .calendar-nav {
+            display: flex;
+            gap: 10px;
+        }
+
+        .calendar-nav-btn {
+            background: var(--light);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .calendar-nav-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .calendar-weekday {
+            text-align: center;
+            font-weight: 600;
+            color: var(--primary);
+            padding: 10px;
+        }
+
+        .calendar-day {
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .calendar-day:hover {
+            background: var(--light);
+        }
+
+        .calendar-day.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .calendar-day.has-event:after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: var(--secondary);
+            border-radius: 50%;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .calendar-day.other-month {
+            color: #ccc;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            margin: 0 8px 8px 0;
+            font-size: 18px;
+            color: var(--primary);
+            background: rgba(26, 54, 93, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #fff;
+            background: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            background: var(--primary);
+            color: #fff;
+            padding: 60px 0 20px;
+        }
+
+        footer h2 {
+            color: #fff;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        footer h2:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--secondary);
+        }
+
+        footer a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #fff;
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 40px;
+            padding-top: 20px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .page-banner {
+                padding: 100px 0 60px;
+            }
+
+            .page-banner h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-banner h1 {
+                font-size: 2rem;
+            }
+
+            .page-banner p {
+                font-size: 1rem;
+            }
+
+            .event-date {
+                float: none;
+                margin: 20px auto;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .navbar-brand span {
+                font-size: 0.9rem;
+            }
+
+            .page-banner {
+                padding: 80px 0 40px;
+            }
+
+            .page-banner h1 {
+                font-size: 1.8rem;
+            }
+
+            .calendar-grid {
+                gap: 5px;
+            }
+
+            .calendar-day {
+                height: 35px;
+                font-size: 0.9rem;
+            }
+        }
+
+        .template-marquee {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .marquee-text {
+            display: inline-block;
+            white-space: nowrap;
+            padding-left: 100%;
+            animation: marquee 15s linear infinite;
+        }
+
+        @keyframes marquee {
+            from {
+                transform: translateX(0%);
+            }
+
+            to {
+                transform: translateX(-100%);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="main-header">
+        <div class="template-marquee bg-warning text-dark py-1">
+            <div class="marquee-text fw-semibold">
+                ⚠️ This is just a template for demonstration purposes — content is placeholder only ⚠️
+            </div>
+        </div>
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center" href="index.html">
+                    <img src="./images/logo.png" width="60" alt="SCL India" class="me-2">
+                    <span class="fw-bold">Society of Construction Law, India</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link " href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="calendar.html">Calendar</a></li>
+                        <li class="nav-item"><a class="nav-link" href="past-events.html">Past Events</a></li>
+                        <li class="nav-item"><a class="nav-link" href="digital-library.html">Digital Library</a></li>
+                        <li class="nav-item"><a class="btn btn-primary ms-lg-3 px-4" href="contact.html">Contact Us</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Banner -->
+    <section class="page-banner">
+        <div class="container">
+            <h1 data-aos="fade-up" data-aos-delay="100">Events Calendar</h1>
+            <p data-aos="fade-up" data-aos-delay="200">Stay updated with upcoming conferences, workshops, and networking
+                events in construction law</p>
+        </div>
+    </section>
+
+    <!-- Calendar Section -->
+    <section class="calendar-section py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center mb-5" data-aos="fade-up">
+                    <p class="lead">Join our events to learn, network, and stay at the forefront of construction law
+                        practice in India.</p>
+                </div>
+            </div>
+
+            <!-- Calendar Filters -->
+            <div class="calendar-filters" data-aos="fade-up">
+                <div class="row">
+                    <div class="col-md-6 mb-3 mb-md-0">
+                        <h4>Filter by Event Type</h4>
+                        <div class="d-flex flex-wrap gap-2">
+                            <button class="btn btn-outline-primary btn-sm active">All Events</button>
+                            <button class="btn btn-outline-primary btn-sm">Conferences</button>
+                            <button class="btn btn-outline-primary btn-sm">Workshops</button>
+                            <button class="btn btn-outline-primary btn-sm">Webinars</button>
+                            <button class="btn btn-outline-primary btn-sm">Networking</button>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h4>Filter by Month</h4>
+                        <select class="form-select">
+                            <option>All Months</option>
+                            <option>January 2024</option>
+                            <option>February 2024</option>
+                            <option>March 2024</option>
+                            <option>April 2024</option>
+                            <option>May 2024</option>
+                            <option>June 2024</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Calendar View -->
+            <div class="calendar-container mb-5" data-aos="fade-up">
+                <div class="calendar-header">
+                    <h3>March 2024</h3>
+                    <div class="calendar-nav">
+                        <button class="calendar-nav-btn">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="calendar-nav-btn">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="calendar-grid">
+                    <div class="calendar-weekday">Sun</div>
+                    <div class="calendar-weekday">Mon</div>
+                    <div class="calendar-weekday">Tue</div>
+                    <div class="calendar-weekday">Wed</div>
+                    <div class="calendar-weekday">Thu</div>
+                    <div class="calendar-weekday">Fri</div>
+                    <div class="calendar-weekday">Sat</div>
+
+                    <!-- Calendar days -->
+                    <div class="calendar-day other-month">25</div>
+                    <div class="calendar-day other-month">26</div>
+                    <div class="calendar-day other-month">27</div>
+                    <div class="calendar-day other-month">28</div>
+                    <div class="calendar-day other-month">29</div>
+                    <div class="calendar-day">1</div>
+                    <div class="calendar-day">2</div>
+
+                    <div class="calendar-day">3</div>
+                    <div class="calendar-day">4</div>
+                    <div class="calendar-day">5</div>
+                    <div class="calendar-day">6</div>
+                    <div class="calendar-day">7</div>
+                    <div class="calendar-day">8</div>
+                    <div class="calendar-day">9</div>
+
+                    <div class="calendar-day">10</div>
+                    <div class="calendar-day">11</div>
+                    <div class="calendar-day">12</div>
+                    <div class="calendar-day">13</div>
+                    <div class="calendar-day">14</div>
+                    <div class="calendar-day">15</div>
+                    <div class="calendar-day has-event">16</div>
+
+                    <div class="calendar-day">17</div>
+                    <div class="calendar-day">18</div>
+                    <div class="calendar-day has-event">19</div>
+                    <div class="calendar-day">20</div>
+                    <div class="calendar-day">21</div>
+                    <div class="calendar-day has-event">22</div>
+                    <div class="calendar-day">23</div>
+
+                    <div class="calendar-day">24</div>
+                    <div class="calendar-day">25</div>
+                    <div class="calendar-day">26</div>
+                    <div class="calendar-day has-event">27</div>
+                    <div class="calendar-day">28</div>
+                    <div class="calendar-day">29</div>
+                    <div class="calendar-day">30</div>
+
+                    <div class="calendar-day">31</div>
+                    <div class="calendar-day other-month">1</div>
+                    <div class="calendar-day other-month">2</div>
+                    <div class="calendar-day other-month">3</div>
+                    <div class="calendar-day other-month">4</div>
+                    <div class="calendar-day other-month">5</div>
+                    <div class="calendar-day other-month">6</div>
+                </div>
+            </div>
+
+            <!-- Events List -->
+            <h2 class="mb-4" data-aos="fade-up">Upcoming Events</h2>
+
+            <!-- Event 1 -->
+            <div class="event-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="event-date">
+                    <div class="event-day">16</div>
+                    <div class="event-month">Mar</div>
+                </div>
+                <div class="event-content">
+                    <span class="event-type conference">Conference</span>
+                    <h3 class="event-title">Annual Construction Law Conference 2024</h3>
+                    <div class="event-meta">
+                        <span><i class="far fa-clock"></i> 9:00 AM - 5:00 PM</span>
+                        <span><i class="fas fa-map-marker-alt"></i> The Grand Hotel, New Delhi</span>
+                        <span><i class="fas fa-users"></i> In-person</span>
+                    </div>
+                    <p>Join leading experts, practitioners, and judges for a full-day conference on the latest
+                        developments in construction law, arbitration trends, and dispute resolution mechanisms.</p>
+                    <button class="event-btn">Register Now</button>
+                </div>
+            </div>
+
+            <!-- Event 2 -->
+            <div class="event-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="event-date">
+                    <div class="event-day">19</div>
+                    <div class="event-month">Mar</div>
+                </div>
+                <div class="event-content">
+                    <span class="event-type webinar">Webinar</span>
+                    <h3 class="event-title">Digital Transformation in Construction Contracts</h3>
+                    <div class="event-meta">
+                        <span><i class="far fa-clock"></i> 6:00 PM - 7:30 PM</span>
+                        <span><i class="fas fa-video"></i> Online</span>
+                        <span><i class="fas fa-users"></i> Members Only</span>
+                    </div>
+                    <p>Explore how digital technologies are transforming contract management, documentation, and dispute
+                        resolution in the construction industry.</p>
+                    <button class="event-btn">Register Now</button>
+                </div>
+            </div>
+
+            <!-- Event 3 -->
+            <div class="event-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="event-date">
+                    <div class="event-day">22</div>
+                    <div class="event-month">Mar</div>
+                </div>
+                <div class="event-content">
+                    <span class="event-type workshop">Workshop</span>
+                    <h3 class="event-title">Drafting Effective Construction Contracts</h3>
+                    <div class="event-meta">
+                        <span><i class="far fa-clock"></i> 10:00 AM - 4:00 PM</span>
+                        <span><i class="fas fa-map-marker-alt"></i> SCL India Office, New Delhi</span>
+                        <span><i class="fas fa-users"></i> Limited Seats</span>
+                    </div>
+                    <p>Hands-on workshop focusing on practical techniques for drafting clear, effective construction
+                        contracts that minimize disputes and maximize project success.</p>
+                    <button class="event-btn">Register Now</button>
+                </div>
+            </div>
+
+            <!-- Event 4 -->
+            <div class="event-card" data-aos="fade-up" data-aos-delay="400">
+                <div class="event-date">
+                    <div class="event-day">27</div>
+                    <div class="event-month">Mar</div>
+                </div>
+                <div class="event-content">
+                    <span class="event-type networking">Networking</span>
+                    <h3 class="event-title">Young Practitioners Networking Evening</h3>
+                    <div class="event-meta">
+                        <span><i class="far fa-clock"></i> 6:30 PM - 9:00 PM</span>
+                        <span><i class="fas fa-map-marker-alt"></i> The Terrace Lounge, New Delhi</span>
+                        <span><i class="fas fa-users"></i> Under 35s</span>
+                    </div>
+                    <p>An informal networking event for young construction law practitioners to connect, share
+                        experiences, and build professional relationships.</p>
+                    <button class="event-btn">Register Now</button>
+                </div>
+            </div>
+
+            <!-- Past Events Toggle -->
+            <div class="text-center mt-5" data-aos="fade-up">
+                <button class="btn btn-outline-primary">View Past Events</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section bg-light py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <h2>Never Miss an Event</h2>
+                    <p>Subscribe to our events newsletter to receive updates about upcoming conferences, workshops, and
+                        networking opportunities.</p>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left" data-aos-delay="100">
+                    <form class="d-flex">
+                        <input type="email" class="form-control me-2" placeholder="Your email address">
+                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-md-4">
+                    <h2>Society of Construction Law, India</h2>
+                    <p>Promoting excellence in construction law through education, networking, and professional
+                        development.</p>
+                    <p><i class="fas fa-map-marker-alt me-2"></i> R-43, 3rd Floor, Greater Kailash-1, New Delhi 110048
+                    </p>
+                    <p><i class="fas fa-envelope me-2"></i> info@sclindia.org</p>
+                    <p><i class="fas fa-phone me-2"></i> 011-41731308-09</p>
+                </div>
+                <div class="col-md-4">
+                    <h2>Quick Links</h2>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="index.html"><i class="fas fa-angle-right me-2"></i> Home</a></li>
+                        <li class="mb-2"><a href="calendar.html"><i class="fas fa-angle-right me-2"></i> Calendar</a>
+                        </li>
+                        <li class="mb-2"><a href="past-events.html"><i class="fas fa-angle-right me-2"></i> Past
+                                Events</a>
+                        </li>
+                        <li class="mb-2"><a href="digital-library.html"><i class="fas fa-angle-right me-2"></i>
+                                Digital Library</a></li>
+                        <li class="mb-2"><a href="contact.html"><i class="fas fa-angle-right me-2"></i> Contact</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h2>Connect With Us</h2>
+                    <div class="social-links mb-4">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                    <h2>Map</h2>
+                    <iframe
+                        src="https://maps.google.com/maps?q=Ratan%20Kumar%20Singh%2C%20Senior%20Advocate&amp;t=m&amp;z=15&amp;output=embed"
+                        width="100%" height="150" style="border:0; border-radius: 5px;" allowfullscreen
+                        loading="lazy"></iframe>
+                </div>
+            </div>
+            <div class="footer-bottom d-flex flex-column flex-md-row justify-content-between align-items-center mt-4">
+                <p class="mb-2 mb-md-0">© 2025 All Rights Reserved. Society Of Construction Law, India</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+
+        // Simple calendar navigation (for demonstration)
+        document.querySelectorAll('.calendar-nav-btn').forEach(button => {
+            button.addEventListener('click', function () {
+                alert('Calendar navigation would show different months in a complete implementation.');
+            });
+        });
+
+        // Simple calendar day selection (for demonstration)
+        document.querySelectorAll('.calendar-day:not(.other-month)').forEach(day => {
+            day.addEventListener('click', function () {
+                document.querySelectorAll('.calendar-day').forEach(d => {
+                    d.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
+        });
+
+        // Event filter buttons (for demonstration)
+        document.querySelectorAll('.btn-outline-primary').forEach(button => {
+            button.addEventListener('click', function () {
+                document.querySelectorAll('.btn-outline-primary').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

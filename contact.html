@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Contact – Society of Construction Law, India</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <!-- AOS (Animations) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary: #1a365d;
+            --secondary: #c25705;
+            --accent: #e9b949;
+            --light: #f8f9fa;
+            --dark: #2d3748;
+            --text: #4a5568;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            color: var(--text);
+            scroll-behavior: smooth;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #fff;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar-brand {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .navbar-nav .nav-link {
+            font-weight: 500;
+            padding: 10px 18px;
+            transition: all 0.3s ease;
+            color: var(--dark);
+            position: relative;
+        }
+
+        .navbar-nav .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: var(--secondary);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .navbar-nav .nav-link:hover:after {
+            width: 70%;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #12243f;
+            border-color: #12243f;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .page-banner {
+            background: linear-gradient(rgba(26, 54, 93, 0.85), rgba(26, 54, 93, 0.9)), url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80') center/cover no-repeat;
+            color: #fff;
+            padding: 120px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-banner:before {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: var(--secondary);
+        }
+
+        .page-banner h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .page-banner p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .contact-info-list li {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-info-list li:hover {
+            transform: translateX(5px);
+        }
+
+        .contact-info-list .icon-wrapper {
+            background: rgba(26, 54, 93, 0.1);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .contact-info-list .icon {
+            color: var(--primary);
+            font-size: 20px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            margin: 0 8px 8px 0;
+            font-size: 18px;
+            color: var(--primary);
+            background: rgba(26, 54, 93, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #fff;
+            background: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-form {
+            background: var(--light);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.05);
+        }
+
+        .form-control {
+            padding: 12px 15px;
+            border: 1px solid #e2e8f0;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 0.25rem rgba(26, 54, 93, 0.25);
+        }
+
+        .map-container {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .map-container:hover {
+            transform: translateY(-5px);
+        }
+
+        footer {
+            background: var(--primary);
+            color: #fff;
+            padding: 60px 0 20px;
+        }
+
+        footer h2 {
+            color: #fff;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        footer h2:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--secondary);
+        }
+
+        footer a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #fff;
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 40px;
+            padding-top: 20px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .page-banner {
+                padding: 100px 0 60px;
+            }
+
+            .page-banner h1 {
+                font-size: 2.5rem;
+            }
+
+            .contact-form {
+                padding: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-banner h1 {
+                font-size: 2rem;
+            }
+
+            .page-banner p {
+                font-size: 1rem;
+            }
+
+            .contact-info-list .icon-wrapper {
+                width: 40px;
+                height: 40px;
+            }
+
+            .contact-form {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .navbar-brand span {
+                font-size: 0.9rem;
+            }
+
+            .page-banner {
+                padding: 80px 0 40px;
+            }
+
+            .page-banner h1 {
+                font-size: 1.8rem;
+            }
+        }
+
+        .template-marquee {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .marquee-text {
+            display: inline-block;
+            white-space: nowrap;
+            padding-left: 100%;
+            animation: marquee 15s linear infinite;
+        }
+
+        @keyframes marquee {
+            from {
+                transform: translateX(0%);
+            }
+
+            to {
+                transform: translateX(-100%);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="main-header">
+        <div class="template-marquee bg-warning text-dark py-1">
+            <div class="marquee-text fw-semibold">
+                ⚠️ This is just a template for demonstration purposes — content is placeholder only ⚠️
+            </div>
+        </div>
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center" href="index.html">
+                    <img src="./images/logo.png" width="60" alt="SCL India" class="me-2">
+                    <span class="fw-bold">Society of Construction Law, India</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link " href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="calendar.html">Calendar</a></li>
+                        <li class="nav-item"><a class="nav-link" href="past-events.html">Past Events</a></li>
+                        <li class="nav-item"><a class="nav-link" href="digital-library.html">Digital Library</a></li>
+                        <li class="nav-item"><a class="btn btn-primary ms-lg-3 px-4" href="contact.html">Contact Us</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+    <!-- Banner -->
+    <section class="page-banner">
+        <div class="container">
+            <h1 data-aos="fade-up" data-aos-delay="100">Get In Touch</h1>
+            <p data-aos="fade-up" data-aos-delay="200">Reach out to the Society of Construction Law, India for
+                inquiries, membership information, or collaboration opportunities.</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-page py-5">
+        <div class="container">
+            <div class="row g-5">
+                <!-- Info -->
+                <div class="col-lg-5">
+                    <div data-aos="fade-right" data-aos-delay="100">
+                        <h2 class="mb-4">Contact Details</h2>
+                        <p class="text-muted mb-4">We're here to assist you with any questions regarding construction
+                            law in India.</p>
+                        <ul class="contact-info-list list-unstyled">
+                            <li>
+                                <div class="icon-wrapper">
+                                    <i class="fa fa-map-marker-alt icon"></i>
+                                </div>
+                                <div>
+                                    <h5>Address</h5>
+                                    <p>R-43, 3rd Floor, Greater Kailash-1, New Delhi 110048</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="icon-wrapper">
+                                    <i class="fa fa-envelope icon"></i>
+                                </div>
+                                <div>
+                                    <h5>Email</h5>
+                                    <p>info@sclindia.org</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="icon-wrapper">
+                                    <i class="fa fa-phone icon"></i>
+                                </div>
+                                <div>
+                                    <h5>Phone</h5>
+                                    <p>011-41731308-09</p>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="social-links mt-4">
+                            <a href="#" data-aos="fade-up" data-aos-delay="100"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" data-aos="fade-up" data-aos-delay="200"><i class="fab fa-instagram"></i></a>
+                            <a href="#" data-aos="fade-up" data-aos-delay="300"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" data-aos="fade-up" data-aos-delay="400"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="col-lg-7">
+                    <div class="contact-form" data-aos="fade-left" data-aos-delay="200">
+                        <h3 class="mb-4">Send Us a Message</h3>
+                        <form>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="name" class="form-label">Full Name</label>
+                                    <input type="text" class="form-control" id="name" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="email" class="form-label">Email Address</label>
+                                    <input type="email" class="form-control" id="email" required>
+                                </div>
+                                <div class="col-12">
+                                    <label for="subject" class="form-label">Subject</label>
+                                    <input type="text" class="form-control" id="subject" required>
+                                </div>
+                                <div class="col-12">
+                                    <label for="message" class="form-label">Message</label>
+                                    <textarea class="form-control" id="message" rows="5" required></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary px-4 py-2">Send Message</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Map Section -->
+            <div class="row mt-5">
+                <div class="col-12">
+                    <h2 class="mb-4 text-center" data-aos="fade-up">Our Location</h2>
+                    <div class="map-container" data-aos="fade-up" data-aos-delay="100">
+                        <iframe
+                            src="https://maps.google.com/maps?q=Ratan%20Kumar%20Singh%2C%20Senior%20Advocate&amp;t=m&amp;z=15&amp;output=embed"
+                            width="100%" height="400" style="border:0;" allowfullscreen loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-md-4">
+                    <h2>Society of Construction Law, India</h2>
+                    <p>Promoting excellence in construction law through education, networking, and professional
+                        development.</p>
+                    <p><i class="fas fa-map-marker-alt me-2"></i> R-43, 3rd Floor, Greater Kailash-1, New Delhi 110048
+                    </p>
+                    <p><i class="fas fa-envelope me-2"></i> info@sclindia.org</p>
+                    <p><i class="fas fa-phone me-2"></i> 011-41731308-09</p>
+                </div>
+                <div class="col-md-4">
+                    <h2>Quick Links</h2>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="index.html"><i class="fas fa-angle-right me-2"></i> Home</a></li>
+                        <li class="mb-2"><a href="calendar.html"><i class="fas fa-angle-right me-2"></i> Calendar</a>
+                        </li>
+                        <li class="mb-2"><a href="past-events.html"><i class="fas fa-angle-right me-2"></i> Past
+                                Events</a>
+                        </li>
+                        <li class="mb-2"><a href="digital-library.html"><i class="fas fa-angle-right me-2"></i>
+                                Digital Library</a></li>
+                        <li class="mb-2"><a href="contact.html"><i class="fas fa-angle-right me-2"></i> Contact</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h2>Connect With Us</h2>
+                    <div class="social-links mb-4">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                    <h2>Map</h2>
+                    <iframe
+                        src="https://maps.google.com/maps?q=Ratan%20Kumar%20Singh%2C%20Senior%20Advocate&amp;t=m&amp;z=15&amp;output=embed"
+                        width="100%" height="150" style="border:0; border-radius: 5px;" allowfullscreen
+                        loading="lazy"></iframe>
+                </div>
+            </div>
+            <div class="footer-bottom d-flex flex-column flex-md-row justify-content-between align-items-center mt-4">
+                <p class="mb-2 mb-md-0">© 2025 All Rights Reserved. Society Of Construction Law, India</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+    </script>
+</body>
+
+</html>

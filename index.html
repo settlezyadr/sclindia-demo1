@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Society of Construction Law, India</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <!-- AOS (Animations) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary: #1a365d;
+            --secondary: #c25705;
+            --accent: #e9b949;
+            --light: #f8f9fa;
+            --dark: #2d3748;
+            --text: #4a5568;
+        }
+
+        .text-3xl {
+            font-size: 64px;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            color: var(--text);
+            scroll-behavior: smooth;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #fff;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar-brand {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .navbar-nav .nav-link {
+            font-weight: 500;
+            padding: 10px 18px;
+            transition: all 0.3s ease;
+            color: var(--dark);
+            position: relative;
+        }
+
+        .navbar-nav .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: var(--secondary);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .navbar-nav .nav-link:hover:after {
+            width: 70%;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #12243f;
+            border-color: #12243f;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .page-banner {
+            background: linear-gradient(rgba(26, 54, 93, 0.85), rgba(26, 54, 93, 0.9)), url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80') center/cover no-repeat;
+            color: #fff;
+            padding: 120px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-banner:before {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: var(--secondary);
+        }
+
+        .page-banner h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .page-banner p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .committee-card {
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .committee-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .committee-img {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .committee-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .committee-card:hover .committee-img img {
+            transform: scale(1.05);
+        }
+
+        .committee-content {
+            padding: 25px;
+        }
+
+        .committee-title {
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 10px;
+        }
+
+        .member-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .member-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #f1f1f1;
+            display: flex;
+            align-items: center;
+        }
+
+        .member-list li:last-child {
+            border-bottom: none;
+        }
+
+        .member-icon {
+            width: 30px;
+            height: 30px;
+            background: rgba(26, 54, 93, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            color: var(--primary);
+        }
+
+        .tabs-container {
+            margin-bottom: 40px;
+        }
+
+        .nav-pills .nav-link {
+            padding: 12px 20px;
+            color: var(--text);
+            border-radius: 5px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-pills .nav-link.active,
+        .nav-pills .show>.nav-link {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .nav-pills .nav-link:hover:not(.active) {
+            background-color: rgba(26, 54, 93, 0.1);
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            margin: 0 8px 8px 0;
+            font-size: 18px;
+            color: var(--primary);
+            background: rgba(26, 54, 93, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #fff;
+            background: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            background: var(--primary);
+            color: #fff;
+            padding: 60px 0 20px;
+        }
+
+        footer h2 {
+            color: #fff;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        footer h2:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--secondary);
+        }
+
+        footer a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #fff;
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 40px;
+            padding-top: 20px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Chairman Section Styles */
+        .chairman-section {
+            padding: 60px 0;
+            background-color: #f9fafc;
+        }
+
+        .chairman-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .chairman-img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #fff;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .chairman-name {
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .chairman-title {
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .message-section {
+            background: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .message-header {
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--secondary);
+        }
+
+        .btn-download {
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-download:hover {
+            background-color: #a44904;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .page-banner {
+                padding: 100px 0 60px;
+            }
+
+            .page-banner h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-banner h1 {
+                font-size: 2rem;
+            }
+
+            .page-banner p {
+                font-size: 1rem;
+            }
+
+            .committee-img {
+                height: 180px;
+            }
+
+            .chairman-card {
+                margin-bottom: 30px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .navbar-brand span {
+                font-size: 0.9rem;
+            }
+
+            .page-banner {
+                padding: 80px 0 40px;
+            }
+
+            .page-banner h1 {
+                font-size: 1.8rem;
+            }
+
+            .nav-pills .nav-link {
+                width: 100%;
+                margin-right: 0;
+            }
+
+            .message-section {
+                padding: 20px;
+            }
+        }
+
+        .template-marquee {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .marquee-text {
+            display: inline-block;
+            white-space: nowrap;
+            padding-left: 100%;
+            animation: marquee 15s linear infinite;
+        }
+
+        @keyframes marquee {
+            from {
+                transform: translateX(0%);
+            }
+
+            to {
+                transform: translateX(-100%);
+            }
+        }
+
+        /* Banner background with subtle texture */
+        .banner-bg {
+            background: url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
+            background-size: cover;
+            background-position: center;
+            z-index: 1;
+        }
+
+        /* Dark gradient overlay for readability */
+        .banner-overlay {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+            z-index: 2;
+        }
+
+        .page-banner .container {
+            z-index: 3;
+            position: relative;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="main-header">
+        <div class="template-marquee bg-warning text-dark py-1">
+            <div class="marquee-text fw-semibold">
+                ⚠️ This is just a template for demonstration purposes — content is placeholder only ⚠️
+            </div>
+        </div>
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center" href="index.html">
+                    <img src="./images/logo.png" width="60" alt="SCL India" class="me-2">
+                    <span class="fw-bold">Society of Construction Law, India</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="calendar.html">Calendar</a></li>
+                        <li class="nav-item"><a class="nav-link" href="past-events.html">Past Events</a></li>
+                        <li class="nav-item"><a class="nav-link" href="digital-library.html">Digital Library</a></li>
+                        <li class="nav-item"><a class="btn btn-primary ms-lg-3 px-4" href="contact.html">Contact Us</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Banner -->
+    <!-- Banner -->
+    <section class="page-banner text-white py-5 position-relative">
+        <!-- Background with texture + overlay -->
+        <div class="banner-bg position-absolute top-0 start-0 w-100 h-100"></div>
+        <div class="banner-overlay position-absolute top-0 start-0 w-100 h-100"></div>
+
+        <div class="container text-center position-relative">
+            <span class="badge bg-warning text-dark mb-3 fs-6">5th Edition</span>
+
+            <h1 class="display-5 fw-bold mb-3" data-aos="fade-up" data-aos-delay="100">
+                Biennial International Conference on <br />
+                Construction Law &amp; Arbitration
+            </h1>
+
+            <p class="lead mb-2" data-aos="fade-up" data-aos-delay="200">
+                📅 5th – 7th December, 2025 · 📍 Delhi
+            </p>
+
+            <!-- Contact Info -->
+            <p class="mb-4 small" data-aos="fade-up" data-aos-delay="300">
+                🌐 <a href="https://www.sclindia.org" target="_blank"
+                    class="text-white text-decoration-none">www.sclindia.org</a> &nbsp; | &nbsp;
+                ✉️ <a href="mailto:info@sclindia.org" class="text-white text-decoration-none">info@sclindia.org</a>
+            </p>
+
+            <a href="#register" class="btn btn-lg btn-warning fw-semibold px-4 shadow-sm">
+                Register Here
+            </a>
+        </div>
+    </section>
+
+
+
+    <!-- Chairman Section (fixed alignment) -->
+    <section class="chairman-section py-5">
+        <div class="container">
+            <!-- align-items-stretch makes columns equal height -->
+            <div class="row g-5 align-items-stretch">
+
+                <!-- Chairman Card -->
+                <div class="col-lg-4">
+                    <div class="chairman-card h-100 d-flex flex-column align-items-center text-center p-4 shadow-sm rounded"
+                        data-aos="fade-up">
+                        <img src="https://sclindia.org/wp-content/uploads/2024/04/Ratan-K-Singh.png" alt="Ratan K Singh"
+                            class="chairman-img img-fluid rounded-circle mb-3">
+                        <h3 class="chairman-name mb-1">Ratan K Singh</h3>
+                        <h5 class="chairman-title text-muted mb-3">Founder Chairman</h5>
+                        <p class="small mb-0">
+                            International Member, Keating Chambers London<br>
+                            FCIArb, FMIArb, FAIADR, FPD, SFBiam, and FIACL<br>
+                            Senior Advocate &amp; Arbitrator, New Delhi
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Message -->
+                <div class="col-lg-8">
+                    <!-- h-100 + d-flex + justify-content-start keeps top alignment;
+             use justify-content-center if you prefer vertical centering -->
+                    <div class="message-section h-100 d-flex flex-column justify-content-start p-4" data-aos="fade-up"
+                        data-aos-delay="100">
+                        <h3 class="message-header mb-3">Chairman's Message</h3>
+                        <h4 class="fw-semibold mb-3">Dear Members,</h4>
+
+                        <p class="lead mb-3">
+                            Warm greetings from the Society of Construction Law (SCL-India), which is the Indian branch
+                            of the Society of Construction Law, UK, a leading international body pioneering in
+                            education, study and research in construction law for public benefit.
+                        </p>
+
+                        <p class="mb-3">
+                            As the founder &amp; chairman of SCL-India, it is with great pleasure that I invite you on
+                            behalf of SCL-India to be a delegate in the 2nd edition of our One-day International
+                            Conference on Construction Law and Arbitration to be held at Mumbai on 3rd May, 2025.
+                        </p>
+
+                        <p class="mt-auto mb-0">
+                            <strong>Ratan K Singh</strong><br>
+                            Senior Advocate &amp; Arbitrator, Chairman, SCL India
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Committees Section -->
+    <section class="committees-section py-5">
+        <div class="container">
+
+            <!-- Committee Content -->
+            <div class="tab-content" id="committeesTabsContent">
+                <!-- All Committees -->
+                <div class="tab-pane fade show active" id="all" role="tabpanel">
+                    <div class="row g-4">
+
+                        <!-- Brochure -->
+                        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                            <div class="committee-card">
+                                <div class="committee-img">
+                                    <img src="https://images.unsplash.com/photo-1563097013-a1df1d1fd1c7?auto=format&fit=crop&w=600&q=80"
+                                        alt="Event Brochure">
+                                </div>
+                                <div class="committee-content">
+                                    <h3 class="committee-title">Brochure</h3>
+                                    <p>For more details on the Event, download the Brochure</p>
+                                    <button class="btn-download">View/Download</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sponsor -->
+                        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                            <div class="committee-card">
+                                <div class="committee-img">
+                                    <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=600&q=80"
+                                        alt="Sponsorship Opportunities">
+                                </div>
+                                <div class="committee-content">
+                                    <h3 class="committee-title">Sponsor</h3>
+                                    <p>For more details on the sponsorship opportunities, click here</p>
+                                    <button class="btn-download">View/Download</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Register -->
+                        <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                            <div class="committee-card">
+                                <div class="committee-img">
+                                    <img src="https://images.unsplash.com/photo-1517817748493-49ec54a32465?auto=format&fit=crop&w=600&q=80"
+                                        alt="Event Registration">
+                                </div>
+                                <div class="committee-content">
+                                    <h3 class="committee-title">Register</h3>
+                                    <p>To register as a delegate, click here</p>
+                                    <button class="btn-download">View/Download</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-md-4">
+                    <h2>Society of Construction Law, India</h2>
+                    <p>Promoting excellence in construction law through education, networking, and professional
+                        development.</p>
+                    <p><i class="fas fa-map-marker-alt me-2"></i> R-43, 3rd Floor, Greater Kailash-1, New Delhi 110048
+                    </p>
+                    <p><i class="fas fa-envelope me-2"></i> info@sclindia.org</p>
+                    <p><i class="fas fa-phone me-2"></i> 011-41731308-09</p>
+                </div>
+                <div class="col-md-4">
+                    <h2>Quick Links</h2>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="index.html"><i class="fas fa-angle-right me-2"></i> Home</a></li>
+                        <li class="mb-2"><a href="calendar.html"><i class="fas fa-angle-right me-2"></i> Calendar</a>
+                        </li>
+                        <li class="mb-2"><a href="past-events.html"><i class="fas fa-angle-right me-2"></i> Past
+                                Events</a>
+                        </li>
+                        <li class="mb-2"><a href="digital-library.html"><i class="fas fa-angle-right me-2"></i>
+                                Digital Library</a></li>
+                        <li class="mb-2"><a href="contact.html"><i class="fas fa-angle-right me-2"></i> Contact</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h2>Connect With Us</h2>
+                    <div class="social-links mb-4">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                    <h2>Map</h2>
+                    <iframe
+                        src="https://maps.google.com/maps?q=Ratan%20Kumar%20Singh%2C%20Senior%20Advocate&amp;t=m&amp;z=15&amp;output=embed"
+                        width="100%" height="150" style="border:0; border-radius: 5px;" allowfullscreen
+                        loading="lazy"></iframe>
+                </div>
+            </div>
+            <div class="footer-bottom d-flex flex-column flex-md-row justify-content-between align-items-center mt-4">
+                <p class="mb-2 mb-md-0">© 2025 All Rights Reserved. Society Of Construction Law, India</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+    </script>
+</body>
+
+</html>
