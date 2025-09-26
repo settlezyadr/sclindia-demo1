@@ -19,11 +19,12 @@
     <style>
         :root {
             --primary: #1a365d;
-            --secondary: #c25705;
+            --secondary: #a83d4e;
             --accent: #e9b949;
             --light: #f8f9fa;
             --dark: #2d3748;
             --text: #4a5568;
+            --secondary2: #ffede6;
         }
 
         .text-3xl {
@@ -226,21 +227,21 @@
             height: 40px;
             margin: 0 8px 8px 0;
             font-size: 18px;
-            color: var(--primary);
-            background: rgba(26, 54, 93, 0.1);
+            color: var(--secondary);
+            background: #fff;
             border-radius: 50%;
             transition: all 0.3s ease;
         }
 
         .social-links a:hover {
-            color: #fff;
-            background: var(--primary);
+            color: var(--secondary);
+            background: var(--secondary2);
             transform: translateY(-3px);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         footer {
-            background: var(--primary);
+            background: var(--secondary);
             color: #fff;
             padding: 60px 0 20px;
         }
@@ -342,7 +343,7 @@
         }
 
         .btn-download:hover {
-            background-color: #a44904;
+            background-color: #b95565;
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
@@ -431,13 +432,40 @@
 
         /* Dark gradient overlay for readability */
         .banner-overlay {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+            background: linear-gradient(rgba(255, 174, 174, 0.7), rgba(253, 132, 132, 0.7));
             z-index: 2;
         }
 
         .page-banner .container {
             z-index: 3;
             position: relative;
+        }
+
+        .bg-primary1 {
+            background-color: #a83d4e;
+        }
+
+        .btn-primary1 {
+            background-color: #a83d4e;
+            color: white;
+        }
+
+        .btn-primary1:hover {
+            background-color: #b95565;
+            color: white;
+        }
+
+        .bg-secondary2 {
+            background-color: #ffede6;
+        }
+
+        .btn-secondary2 {
+            background-color: #ffede6;
+        }
+
+        .btn-secondary2:hover {
+            background-color: #fef3ef;
+            color: black;
         }
     </style>
 </head>
@@ -446,7 +474,7 @@
 
     <!-- Header -->
     <header class="main-header">
-        <div class="template-marquee bg-warning text-dark py-1">
+        <div class="template-marquee bg-secondary2 text-dark py-1">
             <div class="marquee-text fw-semibold">
                 ⚠️ This is just a template for demonstration purposes — content is placeholder only ⚠️
             </div>
@@ -467,7 +495,7 @@
                         <li class="nav-item"><a class="nav-link" href="calendar.html">Calendar</a></li>
                         <li class="nav-item"><a class="nav-link" href="past-events.html">Past Events</a></li>
                         <li class="nav-item"><a class="nav-link" href="digital-library.html">Digital Library</a></li>
-                        <li class="nav-item"><a class="btn btn-primary ms-lg-3 px-4" href="contact.html">Contact Us</a>
+                        <li class="nav-item"><a class="btn btn-primary1 ms-lg-3 px-4" href="contact.html">Contact Us</a>
                         </li>
                     </ul>
                 </div>
@@ -476,14 +504,13 @@
     </header>
 
     <!-- Banner -->
-    <!-- Banner -->
     <section class="page-banner text-white py-5 position-relative">
         <!-- Background with texture + overlay -->
-        <div class="banner-bg position-absolute top-0 start-0 w-100 h-100"></div>
+        <div class=" position-absolute top-0 start-0 w-100 h-100"></div>
         <div class="banner-overlay position-absolute top-0 start-0 w-100 h-100"></div>
 
         <div class="container text-center position-relative">
-            <span class="badge bg-warning text-dark mb-3 fs-6">5th Edition</span>
+            <span class="badge bg-secondary2 text-dark mb-3 fs-6">5th Edition</span>
 
             <h1 class="display-5 fw-bold mb-3" data-aos="fade-up" data-aos-delay="100">
                 Biennial International Conference on <br />
@@ -501,7 +528,7 @@
                 ✉️ <a href="mailto:info@sclindia.org" class="text-white text-decoration-none">info@sclindia.org</a>
             </p>
 
-            <a href="#register" class="btn btn-lg btn-warning fw-semibold px-4 shadow-sm">
+            <a href="#register" class="btn btn-lg btn-secondary2 fw-semibold px-4 shadow-sm">
                 Register Here
             </a>
         </div>

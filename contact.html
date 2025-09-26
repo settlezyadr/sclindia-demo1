@@ -19,12 +19,14 @@
     <style>
         :root {
             --primary: #1a365d;
-            --secondary: #c25705;
+            --secondary: #a83d4e;
             --accent: #e9b949;
             --light: #f8f9fa;
             --dark: #2d3748;
             --text: #4a5568;
+            --secondary2: #ffede6;
         }
+
 
         body {
             font-family: 'Segoe UI', Roboto, sans-serif;
@@ -88,7 +90,7 @@
         }
 
         .page-banner {
-            background: linear-gradient(rgba(26, 54, 93, 0.85), rgba(26, 54, 93, 0.9)), url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80') center/cover no-repeat;
+            background: linear-gradient(rgba(255, 174, 174, 0.7), rgba(253, 132, 132, 0.7)), url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80') center/cover no-repeat;
             color: #fff;
             padding: 120px 0 80px;
             text-align: center;
@@ -132,7 +134,7 @@
         }
 
         .contact-info-list .icon-wrapper {
-            background: rgba(26, 54, 93, 0.1);
+            background: var(--secondary2);
             width: 50px;
             height: 50px;
             border-radius: 50%;
@@ -143,29 +145,8 @@
         }
 
         .contact-info-list .icon {
-            color: var(--primary);
+            color: var(--secondary);
             font-size: 20px;
-        }
-
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            margin: 0 8px 8px 0;
-            font-size: 18px;
-            color: var(--primary);
-            background: rgba(26, 54, 93, 0.1);
-            border-radius: 50%;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            color: #fff;
-            background: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         .contact-form {
@@ -198,8 +179,29 @@
             transform: translateY(-5px);
         }
 
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            margin: 0 8px 8px 0;
+            font-size: 18px;
+            color: var(--secondary);
+            background: #fff;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--secondary);
+            background: var(--secondary2);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
         footer {
-            background: var(--primary);
+            background: var(--secondary);
             color: #fff;
             padding: 60px 0 20px;
         }
@@ -310,6 +312,33 @@
                 transform: translateX(-100%);
             }
         }
+
+        .bg-primary1 {
+            background-color: #a83d4e;
+        }
+
+        .btn-primary1 {
+            background-color: #a83d4e;
+            color: white;
+        }
+
+        .btn-primary1:hover {
+            background-color: #b95565;
+            color: white;
+        }
+
+        .bg-secondary2 {
+            background-color: #ffede6;
+        }
+
+        .btn-secondary2 {
+            background-color: #ffede6;
+        }
+
+        .btn-secondary2:hover {
+            background-color: #fef3ef;
+            color: black;
+        }
     </style>
 </head>
 
@@ -317,7 +346,7 @@
 
     <!-- Header -->
     <header class="main-header">
-        <div class="template-marquee bg-warning text-dark py-1">
+        <div class="template-marquee bg-secondary2 text-dark py-1">
             <div class="marquee-text fw-semibold">
                 ⚠️ This is just a template for demonstration purposes — content is placeholder only ⚠️
             </div>
@@ -334,18 +363,17 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                     <ul class="navbar-nav">
-                        <li class="nav-item"><a class="nav-link " href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="calendar.html">Calendar</a></li>
                         <li class="nav-item"><a class="nav-link" href="past-events.html">Past Events</a></li>
                         <li class="nav-item"><a class="nav-link" href="digital-library.html">Digital Library</a></li>
-                        <li class="nav-item"><a class="btn btn-primary ms-lg-3 px-4" href="contact.html">Contact Us</a>
+                        <li class="nav-item"><a class="btn btn-primary1 ms-lg-3 px-4" href="contact.html">Contact Us</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-
 
     <!-- Banner -->
     <section class="page-banner">
@@ -427,7 +455,7 @@
                                     <textarea class="form-control" id="message" rows="5" required></textarea>
                                 </div>
                                 <div class="col-12">
-                                    <button type="submit" class="btn btn-primary px-4 py-2">Send Message</button>
+                                    <button type="submit" class="btn btn-primary1 px-4 py-2">Send Message</button>
                                 </div>
                             </div>
                         </form>

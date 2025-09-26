@@ -19,11 +19,12 @@
     <style>
         :root {
             --primary: #1a365d;
-            --secondary: #c25705;
+            --secondary: #a83d4e;
             --accent: #e9b949;
             --light: #f8f9fa;
             --dark: #2d3748;
             --text: #4a5568;
+            --secondary2: #ffede6;
         }
 
         body {
@@ -88,7 +89,7 @@
         }
 
         .page-banner {
-            background: linear-gradient(rgba(26, 54, 93, 0.85), rgba(26, 54, 93, 0.9)), url('https://images.unsplash.com/photo-1505373877841-8d25f7d46678?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80') center/cover no-repeat;
+            background: linear-gradient(rgba(255, 174, 174, 0.7), rgba(253, 132, 132, 0.7)), url('https://images.unsplash.com/photo-1505373877841-8d25f7d46678?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80') center/cover no-repeat;
             color: #fff;
             padding: 120px 0 80px;
             text-align: center;
@@ -143,21 +144,21 @@
         }
 
         .event-date {
-            background: var(--primary);
-            color: white;
+            border: 2px solid var(--secondary, #6c757d);
+            color: #b95565;
             padding: 15px;
-            text-align: center;
-            width: 80px;
             height: 80px;
+            width: 80px;
+            aspect-ratio: 1 / 1;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             border-radius: 10px;
-            margin: 20px;
-            float: left;
+            margin: 1rem;
             position: relative;
             z-index: 1;
+            float: left;
         }
 
         .event-day {
@@ -178,7 +179,7 @@
         }
 
         .event-title {
-            color: var(--primary);
+            color: var(--secondary);
             font-weight: 700;
             margin-bottom: 10px;
         }
@@ -233,21 +234,22 @@
         }
 
         .event-btn {
-            background: var(--primary);
-            color: white;
-            padding: 8px 20px;
+            background: var(--secondary2, #e0e0e0);
+            color: var(--secondary, #6c757d);
+            padding: 0.5rem 1.25rem;
             border-radius: 5px;
             text-decoration: none;
             display: inline-block;
-            transition: all 0.3s ease;
+            transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
             font-weight: 500;
             border: none;
+            /* Kept as per the last declaration */
             cursor: pointer;
         }
 
         .event-btn:hover {
-            background: var(--secondary);
-            color: white;
+            background: #f3d3d8;
+            color: var(--secondary);
             transform: translateY(-2px);
         }
 
@@ -342,21 +344,21 @@
             height: 40px;
             margin: 0 8px 8px 0;
             font-size: 18px;
-            color: var(--primary);
-            background: rgba(26, 54, 93, 0.1);
+            color: var(--secondary);
+            background: #fff;
             border-radius: 50%;
             transition: all 0.3s ease;
         }
 
         .social-links a:hover {
-            color: #fff;
-            background: var(--primary);
+            color: var(--secondary);
+            background: var(--secondary2);
             transform: translateY(-3px);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         footer {
-            background: var(--primary);
+            background: var(--secondary);
             color: #fff;
             padding: 60px 0 20px;
         }
@@ -468,6 +470,33 @@
                 transform: translateX(-100%);
             }
         }
+
+        .bg-primary1 {
+            background-color: #a83d4e;
+        }
+
+        .btn-primary1 {
+            background-color: #a83d4e;
+            color: white;
+        }
+
+        .btn-primary1:hover {
+            background-color: #b95565;
+            color: white;
+        }
+
+        .bg-secondary2 {
+            background-color: #ffede6;
+        }
+
+        .btn-secondary2 {
+            background-color: #ffede6;
+        }
+
+        .btn-secondary2:hover {
+            background-color: #fef3ef;
+            color: black;
+        }
     </style>
 </head>
 
@@ -475,7 +504,7 @@
 
     <!-- Header -->
     <header class="main-header">
-        <div class="template-marquee bg-warning text-dark py-1">
+        <div class="template-marquee bg-secondary2 text-dark py-1">
             <div class="marquee-text fw-semibold">
                 ⚠️ This is just a template for demonstration purposes — content is placeholder only ⚠️
             </div>
@@ -492,11 +521,11 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                     <ul class="navbar-nav">
-                        <li class="nav-item"><a class="nav-link " href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
                         <li class="nav-item"><a class="nav-link active" href="calendar.html">Calendar</a></li>
                         <li class="nav-item"><a class="nav-link" href="past-events.html">Past Events</a></li>
                         <li class="nav-item"><a class="nav-link" href="digital-library.html">Digital Library</a></li>
-                        <li class="nav-item"><a class="btn btn-primary ms-lg-3 px-4" href="contact.html">Contact Us</a>
+                        <li class="nav-item"><a class="btn btn-primary1 ms-lg-3 px-4" href="contact.html">Contact Us</a>
                         </li>
                     </ul>
                 </div>
@@ -710,7 +739,7 @@
 
             <!-- Past Events Toggle -->
             <div class="text-center mt-5" data-aos="fade-up">
-                <button class="btn btn-outline-primary">View Past Events</button>
+                <button class="btn btn-outline-secondary">View Past Events</button>
             </div>
         </div>
     </section>
@@ -727,7 +756,7 @@
                 <div class="col-lg-6" data-aos="fade-left" data-aos-delay="100">
                     <form class="d-flex">
                         <input type="email" class="form-control me-2" placeholder="Your email address">
-                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                        <button type="submit" class="btn btn-primary1">Subscribe</button>
                     </form>
                 </div>
             </div>
